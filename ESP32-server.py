@@ -11,8 +11,8 @@ import neopixel, time
 
 
 # Connect to local Wi Fi
-ssid = 'Hernandez02'
-password = '31lchm96mchm56kjhm53ghm'
+ssid = '---'
+password = '---'
 
 station = network.WLAN(network.STA_IF)
 station.active(True)
@@ -28,7 +28,6 @@ print(station.ifconfig())
 
 
 # Initializing constants
-buzzer_max_frequency = 1500
 buzzer_duty_cycle = 100
 num_neopixel_leds = 10
 
@@ -74,8 +73,7 @@ while True:
         neop.write()
 
     elif (mode >> 24) == 0x02:
-        percentage = (request & 0x000000FF) / 100
-        frequency = int(buzzer_max_frequency * percentage)
+        frequency = request & 0x00000FFF
         buzzer_pwm.freq(frequency)
         if frequency == 0:
             buzzer_pwm.duty(0)

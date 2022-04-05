@@ -31,8 +31,8 @@ led_rf_range = [15, 95]
 fan_range = [0, 100]
 fan_finger_range = [20, 200]
 
-buzzer_range = [0, 100]
-buzzer_swipe_range = [50, 150]
+buzzer_range = [0, 1500]
+buzzer_finger_range = [20, 200]
 
 # Initializing Variables
 previous_index_position = [0, 0]
@@ -134,7 +134,7 @@ while True:
                 # Calculating how much the fan should be working [0%-100%]
                 power_length = hypot(tip_thumb_x - tip_lf_x, tip_thumb_y - tip_lf_y)
 
-                fan_power = int(np.interp(power_length, fan_finger_range, fan_range))
+                fan_power = int(np.interp(power_length, buzzer_finger_range, buzzer_range))
 
                 # Sending request
                 if not freeze_requests:
