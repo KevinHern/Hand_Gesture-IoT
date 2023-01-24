@@ -11,8 +11,8 @@ import neopixel, time
 
 
 # Connect to local Wi Fi
-ssid = '---'
-password = '---'
+ssid = 'MicroPython-AP'
+password = ''
 
 station = network.WLAN(network.STA_IF)
 station.active(True)
@@ -34,7 +34,7 @@ num_neopixel_leds = 10
 
 # Initializing Pins
 buzzer_pwm = PWM(Pin(14))
-buzzer_pwm.freq(0)
+buzzer_pwm.freq(1000)
 buzzer_pwm.duty(0)
 
 neop = neopixel.NeoPixel(Pin(15), num_neopixel_leds)
