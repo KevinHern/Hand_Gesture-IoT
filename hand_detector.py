@@ -5,7 +5,6 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import numpy as np
-from enum import Enum
 from utility_classes import Detector, Colors
 import socket
 
@@ -39,7 +38,7 @@ previous_index_position = [0, 0]
 rgb = [0, 0, 0]
 fan_power = 50
 
-HOST = "192.168.1.78"  # The server's hostname or IP address
+HOST = "192.168.4.3"  # The server's hostname or IP address
 PORT = 15000  # The port used by the server
 
 # Initializing detector input variables
@@ -51,7 +50,7 @@ print("Sampling is frozen: ", freeze_sampling)
 print("Sending requests is frozen: ", freeze_requests)
 
 
-# Always execute
+# Always executeffss
 while True:
     # Take a picture from the webcam
     success, img = cap.read()
@@ -109,7 +108,6 @@ while True:
 
                 if not freeze_requests:
                     esp_request = 0x01000000 | (rgb[0] << 16) | (rgb[1] << 8) | rgb[2]
-                    print(hex(esp_request))
                     try:
                         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                             s.connect((HOST, PORT))
@@ -134,11 +132,12 @@ while True:
                 # Calculating how much the fan should be working [0%-100%]
                 power_length = hypot(tip_thumb_x - tip_lf_x, tip_thumb_y - tip_lf_y)
 
-                fan_power = int(np.interp(power_length, buzzer_finger_range, buzzer_range))
+                buzzer_power = int(np.interp(power_length, buzzer_finger_range, buzzer_range))
+                buzzer_power = 1 if buzzer_power < 1 else buzzer_power
 
                 # Sending request
                 if not freeze_requests:
-                    esp_request = 0x02000000 | fan_power
+                    esp_request = 0x02000000 | buzzer_power
                     try:
                         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                             s.connect((HOST, PORT))
@@ -184,7 +183,7 @@ while True:
     # ---------------------------- INPUTS
 
     # Changing Detector Mode to RGB
-    key_pressed = cv2.waitKey(1)
+    key_pressed = cv2.waitKey(5)
     if key_pressed & 0xff == ord('1'):
         detector_mode = Detector.RGB
         print("Changing Detector Mode to RGB")
