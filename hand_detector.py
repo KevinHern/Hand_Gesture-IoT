@@ -133,7 +133,6 @@ while True:
                 power_length = hypot(tip_thumb_x - tip_lf_x, tip_thumb_y - tip_lf_y)
 
                 buzzer_power = int(np.interp(power_length, buzzer_finger_range, buzzer_range))
-                buzzer_power = 1 if buzzer_power < 1 else buzzer_power
 
                 # Sending request
                 if not freeze_requests:
