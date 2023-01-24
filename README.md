@@ -24,6 +24,15 @@ As stated above, we decided to give [MicroPython](https://github.com/FunPythonEC
 ## Hardware
 Since we needed a microchip with WiFi module to decentralize the hardware, we decided to use the cheap version of the ESP that is ESP8266 for the production model. However, during the prototype, development and testing phase, we used an ESP32 that was embeded in a PCB with already mounted components to optimize debugging and the overall time investment during the development.
 
+## Software
+The project uses a bunch of libraries. The required libraries (that can be installed using PIP) are:
+- opencv-python
+- mediapipe
+- pycaw
+- comtypes
+- ctypes
+- numpy
+
 # Inspiration
 The main project that inspired this idea was a short project done in Python with OpenCV. In summary, the project consisted of detecting, in real time, a hands of the user and register the distance between the fingex and thumb finger. Depending on how close they were, the volume of the computer was adjusted. If the distance was short, then the volume was very dim and if the distance was large, then the volume was louder.
 The link of the project [is this one](https://itsourcecode.com/free-projects/python-projects/volume-control-with-hand-detection-opencv-python-with-source-code/).
