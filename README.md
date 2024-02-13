@@ -47,3 +47,25 @@ The basic structure is as follows: (Example number: 0x014488FF)
 Currently, there are 2 IoT devices implemented, which are:
 * Neopixels (IoT ID = 0x01): 6 hex numbers are passed down, in the respective RGB order, that represent the amount of Red, Green and Blue that should have all the neopixels.
 * Buzzer (IoT ID = 0x02): A number between 0 and 1500 is passed down. The value is encoded in the 3 rightmost hex numbers.
+
+# Execution
+
+## Network
+You need a network to make this project work. A private network without internet access is enough.
+
+NOTES*
+This project doesn't work under corporate network infrastructures.
+
+## ESP Server
+1. Go to the **ESP32-server.py** file and modify the following variables:
+  - **ssdi**: Name of the network you are going to connect.
+  - **password**: Password of the network
+2. Send the **ESP32-server.py** file to the ESP Microcontroller.
+
+## Computer
+1. Go to the **hand_detector.py** file and modify the following variables:
+  - **HOST**: The IP address of the ESP Microcontroller after it connected to the network
+2. Execute **hand_detector.py** file in your computer
+
+## IMPORTANT NOTES:
+- Sometimes, the installed antivirus might block the Program from executing. Tell the antivirus to refrain from preventing the program to execute. Use your antivirus' documentation to do that
